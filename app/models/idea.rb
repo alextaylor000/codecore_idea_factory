@@ -13,6 +13,9 @@ class Idea < ActiveRecord::Base
   validates :title, presence: true, uniqueness: { scope: :user_id }
   validates :description, presence: true
 
+  # images
+  mount_uploader :image, IdeaImageUploader
+
   def creator_username
     creator_user.username
   end

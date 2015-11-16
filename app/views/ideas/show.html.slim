@@ -3,6 +3,9 @@ p = @idea.description
 p user:
 p = link_to @idea.creator_username, @idea.creator_user
 
+- if @idea.image?
+  p = image_tag @idea.image.url, width: 200 
+
 
 p Members: #{@idea.num_members}
 p Likes: #{@idea.num_likes}
