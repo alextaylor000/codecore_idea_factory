@@ -3,6 +3,8 @@ strong
   = mail_to @user.email
 
 h2 Ideas
+= link_to "Create a new idea", new_idea_path, class: "btn btn-default"
+
 - if @user.ideas.any?
   - @user.ideas.each do |idea|
     div class="well"
