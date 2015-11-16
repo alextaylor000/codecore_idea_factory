@@ -1,0 +1,18 @@
+- if @idea.errors.any?
+  div class="alert alert-danger"
+    p Oops! There were some errors:
+    p = @idea.errors.full_messages.join(", ")
+
+
+
+= form_for @idea do |f|
+  div class="form-group"
+    = f.label :title
+    = f.text_field :title, class: "form-control"
+
+  div class="form-group"
+    = f.label :description
+    = f.text_area :description, class: "form-control"
+
+  div class="form-group"
+    = f.submit "Post", class: "btn btn-success"

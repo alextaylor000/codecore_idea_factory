@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
   root "sessions#new"
-
-  resources :users
-  resources :sessions, only: [:create]
-
   get "/signup" => "users#new"
   get "/login"  => "sessions#new"
   delete "/logout" => "sessions#destroy"
+
+  resources :sessions, only: [:create]
+  resources :users
+  resources :ideas
 end
