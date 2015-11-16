@@ -1,6 +1,8 @@
 class Idea < ActiveRecord::Base
   belongs_to :user
   has_many :comments
+  has_many :idea_members
+  has_many :member_users, through: :idea_members, source: :user
 
   validates :title, presence: true, uniqueness: { scope: :user_id }
   validates :description, presence: true
