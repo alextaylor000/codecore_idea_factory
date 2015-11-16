@@ -19,6 +19,10 @@ class Idea < ActiveRecord::Base
     comments.all.order("created_at DESC")
   end
 
+  def num_members
+    idea_members.count
+  end
+
   def members_include?(user)
     member_users.include? user
   end

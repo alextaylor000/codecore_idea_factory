@@ -3,6 +3,10 @@ p = @idea.description
 p user:
 p = link_to @idea.creator_username, @idea.creator_user
 
+
+p Members: #{@idea.num_members}
+
+
 / TODO: join/like partials
 / TODO: cancan authorization
 - if user_signed_in? && @idea.members_include?(current_user)
