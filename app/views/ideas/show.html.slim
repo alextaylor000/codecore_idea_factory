@@ -4,9 +4,10 @@ p user:
 p = link_to @idea.creator_username, @idea.creator_user
 
 / TODO: join/like partials
+/ TODO: cancan authorization
 - if user_signed_in? && @idea.members_include?(current_user)
   p = link_to "Leave", idea_idea_member_path(@idea, @idea.membership_for(current_user)), method: :delete
-- else
+- elsif current_user != @idea.user
   p = link_to "Join", idea_idea_members_path(@idea), method: :post
 
 
