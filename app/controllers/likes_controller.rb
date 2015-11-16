@@ -7,7 +7,7 @@ class LikesController < ApplicationController
     like.idea                 = idea
     like.user                 = current_user
     if like.save
-      flash[:notice] = "Liked"
+      # flash[:notice] = "Liked"
     else
       flash[:danger] = "Something went wrong liking this idea."
     end
@@ -18,7 +18,7 @@ class LikesController < ApplicationController
   def destroy
     idea                      = Idea.find(params[:idea_id])
     current_user.likes.find(params[:id]).destroy
-    flash[:notice] = "Unliked"
+    # flash[:notice] = "Unliked"
     redirect_to idea
   end
 end

@@ -7,7 +7,7 @@ class IdeaMembersController < ApplicationController
     idea_membership.idea      = idea
     idea_membership.user      = current_user
     if idea_membership.save
-      flash[:notice] = "Joined idea"
+      #flash[:notice] = "Joined idea"
     else
       flash[:danger] = "Something went wrong joining this idea."
     end
@@ -17,7 +17,7 @@ class IdeaMembersController < ApplicationController
   def destroy
     idea                      = Idea.find(params[:idea_id])
     current_user.idea_members.find(params[:id]).destroy
-    flash[:notice] = "You left this idea"
+    #flash[:notice] = "You left this idea"
     redirect_to idea
   end
 end

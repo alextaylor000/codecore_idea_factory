@@ -1,6 +1,9 @@
-h1 Ideas
-/= link_to "New Idea", new_idea_path, class: "btn btn-default"
-= link_to "New Idea", "#", class: "btn btn-default", data: { toggle: "modal", target: "#new-idea-modal" }
+div class="container-fluid"
+  div class="col-xs-6"
+    h1 Ideas
+  div class="col-xs-6"
+    div class="pull-right"
+      = link_to "New Idea", "#", class: "btn btn-default", data: { toggle: "modal", target: "#new-idea-modal" }
 
 div class="modal fade" id="new-idea-modal" tabindex="-1"
   div class="modal-dialog"
@@ -15,25 +18,28 @@ div class="modal fade" id="new-idea-modal" tabindex="-1"
         - else
           p You must be #{link_to "signed in", login_path} to continue.
 
-- @ideas.each do |idea|
-  div clas="panel panel-default"
-    p = idea.title
-    p = idea.description_truncate 140
-    p by #{link_to idea.creator_username, idea.creator_user}
-    p Members: #{idea.num_members}
-    p Likes: #{idea.num_likes}
+div class="container-fluid"
+  - @ideas.each do |idea|
+    div class="panel-idea"
+      h4 = link_to idea.title, idea
+      p = idea.description_truncate 250
+      div class="tools"
+        p by #{link_to idea.creator_username, idea.creator_user}
 
-    / TODO: join/like partials
-    / TODO: cancan authorization
-    - if user_signed_in? && idea.members_include?(current_user)
-      p = link_to "Leave", idea_idea_member_path(idea, idea.membership_for(current_user)), method: :delete
-    - elsif current_user != idea.user
-      p = link_to "Join", idea_idea_members_path(idea), method: :post
+        - if user_signed_in? && idea.members_include?(current_user)
+          = link_to "Leave", idea_idea_member_path(idea, idea.membership_for(current_user)), class: "btn btn-info", method: :delete
+        - elsif current_user != idea.user
+          = link_to "Join", idea_idea_members_path(idea), class: "btn btn-info", method: :post
+        span &nbsp;&nbsp;&nbsp;
+        - if user_signed_in? && idea.liked_by?(current_user)
+          = link_to "Unlike", idea_like_path(idea, idea.like_for(current_user)), class: "btn btn-danger", method: :delete
+        - elsif current_user != idea.user
+          = link_to "Like", idea_likes_path(idea), class: "btn btn-danger", method: :post
 
-    - if user_signed_in? && idea.liked_by?(current_user)
-      p = link_to "Unlike", idea_like_path(idea, idea.like_for(current_user)), method: :delete
-    - elsif current_user != idea.user
-      p = link_to "Like", idea_likes_path(idea), method: :post
+        div class="pull-right"
+          p
+            = "<strong>Members:</strong> #{idea.num_members}".html_safe
+            = " • "
+            = "<strong>Likes:</strong> #{idea.num_likes}".html_safe
 
-
-    hr
+        div class="clearfix"
