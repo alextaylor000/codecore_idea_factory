@@ -5,6 +5,7 @@ p = link_to @idea.creator_username, @idea.creator_user
 
 
 p Members: #{@idea.num_members}
+p Likes: #{@idea.num_likes}
 
 
 / TODO: join/like partials
@@ -13,6 +14,12 @@ p Members: #{@idea.num_members}
   p = link_to "Leave", idea_idea_member_path(@idea, @idea.membership_for(current_user)), method: :delete
 - elsif current_user != @idea.user
   p = link_to "Join", idea_idea_members_path(@idea), method: :post
+
+- if user_signed_in? && @idea.liked_by?(current_user)
+  p = link_to "Unlike", idea_like_path(@idea, @idea.like_for(current_user)), method: :delete
+- elsif current_user != @idea.user
+  p = link_to "Like", idea_likes_path(@idea), method: :post
+
 
 
 
