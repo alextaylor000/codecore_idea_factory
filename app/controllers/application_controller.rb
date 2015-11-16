@@ -11,6 +11,12 @@ class ApplicationController < ActionController::Base
     current_user.present?
   end
 
+  def authenticate_user
+    unless user_signed_in?
+      redirect_to login_path, notice: "You must be signed in to continue."
+    end
+  end
+
   def log_in_user(user)
     session[:user_id] = user.id
   end
@@ -21,6 +27,7 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user
   helper_method :user_signed_in?
+  helper_method :authenticate_user
   helper_method :log_in_user
   helper_method :log_out_user
 end

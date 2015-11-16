@@ -18,4 +18,12 @@ class Idea < ActiveRecord::Base
   def comments_by_date
     comments.all.order("created_at DESC")
   end
+
+  def members_include?(user)
+    member_users.include? user
+  end
+
+  def membership_for(user)
+    idea_members.find_by_user_id(user.id)
+  end
 end

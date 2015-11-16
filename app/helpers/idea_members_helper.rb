@@ -1,0 +1,2 @@
+module IdeaMembersHelper
+end

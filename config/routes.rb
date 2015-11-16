@@ -8,5 +8,7 @@ Rails.application.routes.draw do
   resources :users
   resources :ideas do
     resources :comments, only: [:create]
+    # TODO: refactor these routes, they read ugly
+    resources :idea_members, only: [:create, :destroy]
   end
 end

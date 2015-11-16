@@ -2,10 +2,24 @@ h1 = @idea.title
 p = @idea.description
 p user:
 p = link_to @idea.creator_username, @idea.creator_user
+
+/ TODO: join/like partials
+- if user_signed_in? && @idea.members_include?(current_user)
+  p = link_to "Leave", idea_idea_member_path(@idea, @idea.membership_for(current_user)), method: :delete
+- else
+  p = link_to "Join", idea_idea_members_path(@idea), method: :post
+
+
+
+/ TODO: tool partials
 - if can? :manage, @idea
   p tools
   p = link_to "edit", edit_idea_path(@idea)
   p = link_to "delete", idea_path(@idea), method: :delete, data: { confirm: "Really delete this idea?" }
+
+
+
+/ TODO: comment partials
 h1 Comments
 - if user_signed_in?
   h2 New Comment
