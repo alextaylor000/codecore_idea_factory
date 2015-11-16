@@ -6,6 +6,7 @@ class IdeasController < ApplicationController
   end
 
   def create
+    # TODO: tweak redirects for modal
     @idea = Idea.new(idea_params)
     @idea.user = current_user
     if @idea.save
@@ -16,6 +17,7 @@ class IdeasController < ApplicationController
   end
 
   def index
+    @idea = Idea.new
     @ideas = Idea.all_by_date
   end
 
