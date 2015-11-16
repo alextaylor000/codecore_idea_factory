@@ -11,6 +11,7 @@ class LikesController < ApplicationController
     else
       flash[:danger] = "Something went wrong liking this idea."
     end
+    # TODO: redirect_to back if it worked, for the home page
     redirect_to idea
   end
 

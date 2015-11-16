@@ -16,6 +16,19 @@ class Idea < ActiveRecord::Base
   # images
   mount_uploader :image, IdeaImageUploader
 
+  # Decorator methods
+  def self.all_by_date
+    all.order("created_at DESC")
+  end
+
+  def description_truncate(len)
+    if description.length > len
+      "#{description[0..len]}..."
+    else
+      description
+    end
+  end
+
   def creator_username
     creator_user.username
   end

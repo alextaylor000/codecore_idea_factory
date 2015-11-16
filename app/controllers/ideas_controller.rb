@@ -1,6 +1,7 @@
 class IdeasController < ApplicationController
 
   def new
+    authenticate_user
     @idea = Idea.new
   end
 
@@ -15,6 +16,7 @@ class IdeasController < ApplicationController
   end
 
   def index
+    @ideas = Idea.all_by_date
   end
 
   def show
