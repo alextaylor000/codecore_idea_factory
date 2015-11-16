@@ -11,13 +11,13 @@ class IdeaMembersController < ApplicationController
     else
       flash[:danger] = "Something went wrong joining this idea."
     end
-    redirect_to idea
+    redirect_to :back
   end
 
   def destroy
     idea                      = Idea.find(params[:idea_id])
     current_user.idea_members.find(params[:id]).destroy
     #flash[:notice] = "You left this idea"
-    redirect_to idea
+    redirect_to :back
   end
 end

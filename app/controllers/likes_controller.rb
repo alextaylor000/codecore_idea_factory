@@ -8,17 +8,17 @@ class LikesController < ApplicationController
     like.user                 = current_user
     if like.save
       # flash[:notice] = "Liked"
+      redirect_to :back
     else
       flash[:danger] = "Something went wrong liking this idea."
+      redirect_to :back
     end
-    # TODO: redirect_to back if it worked, for the home page
-    redirect_to idea
   end
 
   def destroy
     idea                      = Idea.find(params[:idea_id])
     current_user.likes.find(params[:id]).destroy
     # flash[:notice] = "Unliked"
-    redirect_to idea
+    redirect_to :back
   end
 end
