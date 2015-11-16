@@ -6,3 +6,23 @@ p = link_to @idea.creator_username, @idea.creator_user
   p tools
   p = link_to "edit", edit_idea_path(@idea)
   p = link_to "delete", idea_path(@idea), method: :delete, data: { confirm: "Really delete this idea?" }
+h1 Comments
+- if user_signed_in?
+  h2 New Comment
+  - if @comment.errors.any?
+    div class="alert alert-danger"
+      p = @comment.errors.full_messages.join(", ")
+  = form_for [@idea, @comment] do |f|
+    div class="form-group"
+      = f.label :body
+      = f.text_area :body, class: "form-control"
+    div class="form-group"
+      = f.submit "Post Comment", class: "btn btn-success"
+
+- else
+  p You must be logged in to post new comments.
+
+- @idea.comments_by_date.each do |comment|
+  div class="panel panel-default"
+    p = comment.body
+    / TODO: comment CRUD

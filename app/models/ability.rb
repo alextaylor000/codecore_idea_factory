@@ -5,5 +5,10 @@ class Ability
     can :manage, Idea do |idea|
       idea.user == user
     end
+
+    can :manage, Comment do |comment|
+      comment.user == user
+    end
+
   end
 end
